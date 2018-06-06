@@ -6,7 +6,6 @@ error_reporting(E_ERROR);
 require_once '../vendor/autoload.php';
 require_once '../vendor/yiisoft/yii2/Yii.php';
 
-use Hejiang\UploadedFile\UploadedFile;
 use Hejiang\Storage\Components\StorageComponent;
 
 $storageConfig = [
@@ -17,7 +16,6 @@ $storageConfig = [
         'accessKey' => '',
         'secretKey' => '',
         'bucket' => '',
-        //'urlTemplate' => '?a=1',
     ]
 ];
 
@@ -37,8 +35,8 @@ $app = new \yii\web\Application(
 $storage = \Yii::$app->storage;
 
 /** @var UploadedFile */
-$test = $storage->getUploadedFile('test');
+$file = $storage->getUploadedFile('file');
 
-$res = $test->saveWithOriginalExtension('test');
+$res = $file->saveWithOriginalExtension('file');
 
 var_dump($res);
