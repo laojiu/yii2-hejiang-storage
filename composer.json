@@ -1,10 +1,13 @@
 {
-    "name": "wi1dcard/yii2-file-system",
-    "description": "A file system package for Yii2, supported qiniu / aliyun oss / qcloud cos.",
+    "name": "wi1dcard/yii2-hejiang-storage",
+    "description": "A file uploading extension for Yii2, saving files to object storage service.",
     "type": "library",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "~2.0.5"
+        "yiisoft/yii2": "~2.0.5",
+        "qiniu/php-sdk": "^7.2",
+        "aliyuncs/oss-sdk-php": "^2.3",
+        "qcloud/cos-sdk-v5": "^1.0"
     },
     "authors": [
         {
@@ -14,7 +17,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Hejiang\\FileSystem\\": "lib/"
+            "Hejiang\\Storage\\": "lib/"
         }
     }
 }
