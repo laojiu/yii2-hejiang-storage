@@ -24,7 +24,7 @@ class UploadedFile extends \yii\web\UploadedFile
      *
      * @param string $file
      * @param boolean $deleteTempFile
-     * @return string|false The URL to access this file
+     * @return string|false A URL to access this file
      */
     public function saveAs($file, $deleteTempFile = true)
     {
@@ -39,6 +39,46 @@ class UploadedFile extends \yii\web\UploadedFile
     }
 
     /**
+     * Save the uploaded file with original file extension
+     *
+     * @param string $baseName
+     * @param boolean $deleteTempFile
+     * @return string|false A URL to access this file
+     */
+    public function saveWithOriginalExtension($baseName, $deleteTempFile = true)
+    {
+        return $this->saveAs($baseName . '.' . $this->getExtension(), $deleteTempFile);
+    }
+
+    /**
+     * Save the uploaded file as a unique hash name
+     *
+     * @return string|false A URL to access this file
+     */
+    public function saveAsUniqueHash()
+    {
+        $uniqueName = sha1_file($this->tempName);
+        if($uniqueName == false)
+        {
+            return false;
+        }
+        return $this->saveWithOriginalExtension($uniqueName);
+    }
+
+    /**
+     * Concat `self::$basePath` and file name
+     *
+     * @param string $file
+     * @return string
+     */
+    protected function getFullPath($file)
+    {
+        return rtrim($this->basePath, '/')
+                . '/'
+                . ltrim($file, '/');
+    }
+
+    /**
      * Delete uploaded temp file
      *
      * @return bool
@@ -46,25 +86,6 @@ class UploadedFile extends \yii\web\UploadedFile
     public function deleteTempFile()
     {
         return unlink($this->tempName);
-    }
-
-    /**
-     * Save the uploaded file with original file extension
-     *
-     * @param string $baseName
-     * @param boolean $deleteTempFile
-     * @return string|false The URL to access this file
-     */
-    public function saveWithOriginalExtension($baseName, $deleteTempFile = true)
-    {
-        return $this->saveAs($baseName . '.' . $this->getExtension(), $deleteTempFile);
-    }
-
-    protected function getFullPath($file)
-    {
-        return rtrim($this->basePath, '/')
-                . '/'
-                . ltrim($file, '/');
     }
 
     public static function getInstanceByStorage($name, $driver, $basePath)
