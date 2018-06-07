@@ -2,7 +2,7 @@
 
 namespace Hejiang\Storage\Drivers;
 
-class BaseDriver extends \yii\base\Component
+abstract class BaseDriver extends \yii\base\Component
 {
     public $bucket = '';
 
