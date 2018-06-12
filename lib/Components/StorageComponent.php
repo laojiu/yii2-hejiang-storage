@@ -16,9 +16,14 @@ class StorageComponent extends \yii\base\Component
 
     public $_basePath;
 
-    public function getDriver($type = 'Hejiang\Storage\Drivers\Local', $params = [])
+    public function getDriver()
     {
-        return $this->_driver ? : $this->_driver = \Yii::createObject($type, $params);
+        if ($this->_driver === null) {
+            $this->setDriver([
+                'class' => 'Hejiang\Storage\Drivers\Local'
+            ]);
+        }
+        return $this->_driver;
     }
 
     protected function setDriver($value)
