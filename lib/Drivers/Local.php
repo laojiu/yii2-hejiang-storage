@@ -5,7 +5,7 @@ namespace Hejiang\Storage\Drivers;
 use Hejiang\Storage\Exceptions\StorageException;
 
 
-class Local extends BaseDriver implements DriverInterface
+class Local extends BaseDriver
 {
     public function __construct($config = [])
     {
@@ -27,7 +27,8 @@ class Local extends BaseDriver implements DriverInterface
         } catch (\Exception $ex) {
             throw new StorageException($ex->getMessage());
         }
-        return \Yii::$app->request->hostInfo . '/' . static::getRelativePath($_SERVER['DOCUMENT_ROOT'], $saveTo);
+        $accessUrl = \Yii::$app->request->hostInfo . '/' . static::getRelativePath($_SERVER['DOCUMENT_ROOT'], $saveTo);
+        return $accessUrl;
     }
 
     public static function getRelativePath($from, $to)

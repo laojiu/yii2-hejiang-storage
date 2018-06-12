@@ -2,6 +2,9 @@
 
 namespace Hejiang\Storage\Drivers;
 
+use Hejiang\Storage\Helpers\UrlConverter;
+
+
 abstract class BaseDriver extends \yii\base\Component
 {
     public $bucket = '';
@@ -10,34 +13,32 @@ abstract class BaseDriver extends \yii\base\Component
 
     public $secretKey = '';
 
-    public $urlTemplate = '';
-
-    public $urlCompenents = null;
+    protected $urlCallback = null;
 
     public function init()
     {
         parent::init();
-        try {
-            $this->urlCompenents = parse_url($this->urlTemplate);
-        } catch (\Exception $ex) {
-
+        if($this->urlCallback === null)
+        {
+            $this->urlCallback = new UrlConverter();
         }
     }
 
-    public function getAccessUrl($path, $default = '')
+    public function getUrlCallback()
     {
-        if (is_array($this->urlCompenents)) {
-            $defaultCompenents = parse_url($default);
-            $finalComponents = array_merge($defaultCompenents, $this->urlCompenents);
-            $finalComponents['path'] = '/' . trim($path, '/');
-            return static::buildUrl($finalComponents);
-        } else {
-            return $default;
-        }
+        return $this->urlCallback;
     }
 
-    public static function buildUrl($parts)
+    public function setUrlCallback(Callable $cb)
     {
-        return (isset($parts['scheme']) ? "{$parts['scheme']}:" : '') . ((isset($parts['user']) || isset($parts['host'])) ? '//' : '') . (isset($parts['user']) ? "{$parts['user']}" : '') . (isset($parts['pass']) ? ":{$parts['pass']}" : '') . (isset($parts['user']) ? '@' : '') . (isset($parts['host']) ? "{$parts['host']}" : '') . (isset($parts['port']) ? ":{$parts['port']}" : '') . (isset($parts['path']) ? "{$parts['path']}" : '') . (isset($parts['query']) ? "?{$parts['query']}" : '') . (isset($parts['fragment']) ? "#{$parts['fragment']}" : '');
+        $this->urlCallback = $cb;
     }
+
+    public function saveFile($localFile, $saveTo)
+    {
+        $url = $this->put($localFile, $saveTo);
+        return call_user_func_array($this->urlCallback, [$url, $saveTo]);
+    }
+
+    abstract function put($localFile, $saveTo);
 }

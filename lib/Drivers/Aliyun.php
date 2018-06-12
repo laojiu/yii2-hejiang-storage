@@ -6,10 +6,12 @@ use OSS\OssClient;
 use OSS\Core\OssException;
 use Hejiang\Storage\Exceptions\StorageException;
 
-class Aliyun extends BaseDriver implements DriverInterface
+class Aliyun extends BaseDriver
 {
     public $isCName = false;
     
+    public $endPoint = '';
+
     /**
      * Aliyun OSS Client
      *
@@ -23,7 +25,7 @@ class Aliyun extends BaseDriver implements DriverInterface
         $this->ossClient = new OssClient(
             $this->accessKey, 
             $this->secretKey, 
-            $this->urlCompenents['host'], 
+            $this->endPoint, 
             $this->isCName
         );
     }
@@ -35,6 +37,6 @@ class Aliyun extends BaseDriver implements DriverInterface
         } catch (OssException $ex) {
             throw new StorageException($ex->getErrorMessage() ?: $ex->getMessage());
         }
-        return $this->getAccessUrl($saveTo, $res['oss-request-url']);
+        return $res['oss-request-url'];
     }
 }

@@ -5,7 +5,7 @@ namespace Hejiang\Storage\Drivers;
 use Qcloud\Cos\Client as CosClient;
 use Hejiang\Storage\Exceptions\StorageException;
 
-class Qcloud extends BaseDriver implements DriverInterface
+class Qcloud extends BaseDriver
 {
     public $region;
 
@@ -46,6 +46,6 @@ class Qcloud extends BaseDriver implements DriverInterface
             throw new StorageException($ex->getMessage());
         }
         fclose($handle);
-        return $this->getAccessUrl($saveTo, $res->get('ObjectURL'));
+        return $res->get('ObjectURL');
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use Hejiang\Storage\Helpers\UrlConverter;
+
 define('YII_DEBUG', true);
 
 require_once '../vendor/autoload.php';
@@ -25,9 +27,10 @@ $app = new \yii\web\Application(
 /** @var \Hejiang\Storage\Components\StorageComponent */
 $storage = \Yii::$app->storage;
 
-/** @var \Hejiang\Storage\Drivers\DriverInterface */
+/** @var \Hejiang\Storage\Drivers\BaseDriver */
 $storage->setDriver([
-    'class' => 'Hejiang\Storage\Drivers\Local'
+    'class' => 'Hejiang\Storage\Drivers\Local',
+    // 'urlCallback' => new UrlConverter('https://replaced-domain.com/?replaced-param=foo'),
 ]);
 
 /** @var \Hejiang\Storage\UploadedFile */

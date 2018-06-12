@@ -6,7 +6,7 @@ use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
 use Hejiang\Storage\Exceptions\StorageException;
 
-class Qiniu extends BaseDriver implements DriverInterface
+class Qiniu extends BaseDriver
 {
     /**
      * Qiniu auth class
@@ -37,6 +37,6 @@ class Qiniu extends BaseDriver implements DriverInterface
         {
             throw new StorageException($err->message());
         }
-        return $this->getAccessUrl($res['key']);
+        return $res['key'];
     }
 }

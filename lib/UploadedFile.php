@@ -8,7 +8,7 @@ class UploadedFile extends \yii\web\UploadedFile
     /**
      * Driver interface
      *
-     * @var \Hejiang\Drivers\DriverInterface
+     * @var \Hejiang\Drivers\BaseDriver
      */
     protected $driver;
 
@@ -30,7 +30,7 @@ class UploadedFile extends \yii\web\UploadedFile
     {
         $result = false;
         if ($this->error == UPLOAD_ERR_OK && is_uploaded_file($this->tempName)) {
-            $result = $this->driver->put($this->tempName, $this->getFullPath($file));
+            $result = $this->driver->saveFile($this->tempName, $this->getFullPath($file));
         }
         if ($result && $deleteTempFile) {
             $this->deleteTempFile();

@@ -3,12 +3,12 @@
 namespace Hejiang\Storage\Components;
 
 use Hejiang\Storage\UploadedFile;
-use Hejiang\Storage\Drivers\DriverInterface;
+use Hejiang\Storage\Drivers\BaseDriver;
 
 /**
  * Storage component
  * 
- * @property \Hejiang\Drivers\DriverInterface $driver
+ * @property \Hejiang\Drivers\BaseDriver $driver
  * @property string $basePath
  */
 class StorageComponent extends \yii\base\Component
@@ -43,8 +43,8 @@ class StorageComponent extends \yii\base\Component
 
     protected function setDriverInstance($value)
     {
-        if(!($value instanceof DriverInterface)){
-            throw new \InvalidArgumentException('Driver must be a instance of DriverInterface');
+        if(!($value instanceof BaseDriver)){
+            throw new \InvalidArgumentException('Driver must be a instance of BaseDriver');
         }
         $this->_driver = $value;
     }

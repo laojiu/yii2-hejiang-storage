@@ -15,7 +15,6 @@ Thanks for your attention. This package is only used for my company projects, pl
             'accessKey' => '',
             'secretKey' => '',
             'bucket' => '',
-            //'urlTemplate' => '?style',
         ]
     ]
     ```
