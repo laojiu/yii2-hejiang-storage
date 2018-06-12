@@ -26,7 +26,7 @@ class StorageComponent extends \yii\base\Component
         return $this->_driver;
     }
 
-    protected function setDriver($value)
+    public function setDriver($value)
     {
         if (is_array($value)) {
             $this->_driver = \Yii::createObject($value);
@@ -40,7 +40,7 @@ class StorageComponent extends \yii\base\Component
         return $this->_basePath;
     }
 
-    protected function setBasePath($value)
+    public function setBasePath($value)
     {
         $this->_basePath = $value;
     }
