@@ -26,7 +26,9 @@ $app = new \yii\web\Application(
 $storage = \Yii::$app->storage;
 
 /** @var \Hejiang\Storage\Drivers\DriverInterface */
-$storage->setDriver('Hejiang\Storage\Drivers\Local', []);
+$storage->setDriver([
+    'class' => 'Hejiang\Storage\Drivers\Local'
+]);
 
 /** @var \Hejiang\Storage\UploadedFile */
 $file = $storage->getUploadedFile('file');
