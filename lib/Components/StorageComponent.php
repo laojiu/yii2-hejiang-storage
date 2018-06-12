@@ -3,6 +3,7 @@
 namespace Hejiang\Storage\Components;
 
 use Hejiang\Storage\UploadedFile;
+use Hejiang\Storage\Drivers\DriverInterface;
 
 /**
  * Storage component
@@ -18,21 +19,34 @@ class StorageComponent extends \yii\base\Component
 
     public function getDriver()
     {
-        if ($this->_driver === null) {
+        if ($this->driverInstance === null) {
             $this->setDriver([
                 'class' => 'Hejiang\Storage\Drivers\Local'
             ]);
         }
-        return $this->_driver;
+        return $this->driverInstance;
     }
 
     public function setDriver($value)
     {
         if (is_array($value)) {
-            $this->_driver = \Yii::createObject($value);
+            $this->driverInstance = \Yii::createObject($value);
         } else {
-            $this->_driver = $value;
+            $this->driverInstance = $value;
         }
+    }
+
+    protected function getDriverInstance()
+    {
+        return $this->_driver;
+    }
+
+    protected function setDriverInstance($value)
+    {
+        if(!($value instanceof DriverInterface)){
+            throw new \InvalidArgumentException('Driver must be a instance of DriverInterface');
+        }
+        $this->_driver = $value;
     }
 
     public function getBasePath()
