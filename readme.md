@@ -48,7 +48,7 @@ Thanks for your attention. This package is only used for my company projects, pl
     $url = $file->saveAsUniqueHash();
     ```
 
-    If success, `$url` will be a URL string which can access this file.
+    `$url` will be a URL string which can access this file on success, or `false` on failure.
 
     If there's any error occurred, these methods will throw a `Hejiang\Storage\Exceptions\StorageException`. Don't forget to `try... catch ...`.
 
