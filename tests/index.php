@@ -5,17 +5,9 @@ define('YII_DEBUG', true);
 require_once '../vendor/autoload.php';
 require_once '../vendor/yiisoft/yii2/Yii.php';
 
-use Hejiang\Storage\Components\StorageComponent;
-
 $storageConfig = [
     'class' => 'Hejiang\Storage\Components\StorageComponent',
-    'basePath' => 'temp/',
-    'driver' => [
-        'class' => 'Hejiang\Storage\Drivers\Local',
-        'accessKey' => '',
-        'secretKey' => '',
-        'bucket' => '',
-    ]
+    'basePath' => 'temp/'
 ];
 
 $app = new \yii\web\Application(
@@ -30,12 +22,15 @@ $app = new \yii\web\Application(
     ]
 );
 
-/** @var StorageComponent */
+/** @var \Hejiang\Storage\Components\StorageComponent */
 $storage = \Yii::$app->storage;
 
-/** @var UploadedFile */
+/** @var \Hejiang\Storage\Drivers\DriverInterface */
+$storage->setDriver('Hejiang\Storage\Drivers\Local', []);
+
+/** @var \Hejiang\Storage\UploadedFile */
 $file = $storage->getUploadedFile('file');
 
-$res = $file->saveWithOriginalExtension('file');
+$res = $file->saveAsUniqueHash();
 
 var_dump($res);

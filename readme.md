@@ -4,7 +4,7 @@ Thanks for your attention. This package is only used for my company projects, pl
 
 ## Usage
 
-Add this lines of code to your Yii application config:
+1. Firstly, add this lines of code to your Yii application config:
 
 ```php
 'components' => [
@@ -20,23 +20,37 @@ Add this lines of code to your Yii application config:
 ]
 ```
 
-Then after app bootstarpping, use:
+2. Then after app bootstarpping, you would get the storage component instance like that:
 
 ```php
-// get storage component instance
 $storage = \Yii::$app->storage;
-// fetch uploaded file by field name
-$file = $storage->getUploadedFile('FILE-FIELD-NAME');
-
-// save...
-$res = $file->saveAs('A-NEW-FILE-NAME.EXT');
-// or
-$res = $file->saveWithOriginalExtension('A-NEW-FILE-BASE-NAME');
-// or
-$res = $file->saveAsUniqueHash();
 ```
 
-The result `$res` returns a URL string which can access this file.
+Alternatively, you can also create a driver while app running:
+
+```php
+$storage->setDriver('Hejiang\Storage\Drivers\Local', []);
+```
+
+3. Fetch uploaded file by field name:
+
+```php
+$file = $storage->getUploadedFile('FILE-FIELD-NAME');
+```
+
+4. Save it.
+
+```php
+$url = $file->saveAs('NEW-FILE-NAME.EXT');
+// or
+$url = $file->saveWithOriginalExtension('NEW-FILE-BASE-NAME');
+// or
+$url = $file->saveAsUniqueHash();
+```
+
+If success, `$url` will be a URL string which can access this file.
+
+If there's any error occurred, these methods will throw a `Hejiang\Storage\Exceptions\StorageException`. Don't forget to `try... catch ...`.
 
 ## About
 
