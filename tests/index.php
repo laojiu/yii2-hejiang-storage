@@ -30,7 +30,7 @@ $storage = \Yii::$app->storage;
 /** @var \Hejiang\Storage\Drivers\BaseDriver */
 $storage->setDriver([
     'class' => 'Hejiang\Storage\Drivers\Local',
-    // 'urlCallback' => new UrlConverter('https://replaced-domain.com/?replaced-param=foo'),
+    // 'urlCallback' => new UrlConverter('https://replaced-domain.com?replaced-param=foo'),
 ]);
 
 /** @var \Hejiang\Storage\UploadedFile */
