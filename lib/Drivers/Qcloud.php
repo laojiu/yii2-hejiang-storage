@@ -9,6 +9,8 @@ class Qcloud extends BaseDriver
 {
     public $region;
 
+    public $appId;
+
     /**
      * Tencent cloud COS Client
      *
@@ -23,6 +25,7 @@ class Qcloud extends BaseDriver
             [
                 'region' => $this->region,
                 'credentials' => [
+                    'appId' => $this->appId,
                     'secretId' => $this->accessKey,
                     'secretKey' => $this->secretKey,
                 ],
