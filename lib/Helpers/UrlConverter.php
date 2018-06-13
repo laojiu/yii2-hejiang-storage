@@ -11,7 +11,7 @@ class UrlConverter
         $this->replaceUrl = $replaceUrl;
     }
 
-    public function __invoke($objectUrl, $saveTo)
+    public function __invoke($objectUrl, $saveTo, $driver)
     {
         if ($this->replaceUrl == '') {
             return $objectUrl;
