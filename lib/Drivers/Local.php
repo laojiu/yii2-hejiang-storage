@@ -45,7 +45,7 @@ class Local extends BaseDriver
 
         foreach ($from as $depth => $dir) {
             // find first non-matching dir
-            if ($dir === $to[$depth]) {
+            if (strcasecmp($dir, $to[$depth]) === 0) {
                 // ignore this directory
                 array_shift($relPath);
             } else {
