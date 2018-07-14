@@ -27,7 +27,7 @@ class Local extends BaseDriver
         } catch (\Exception $ex) {
             throw new StorageException($ex->getMessage());
         }
-        $accessUrl = \Yii::$app->request->hostInfo . '/' . static::getRelativePath($_SERVER['DOCUMENT_ROOT'], $saveTo);
+        $accessUrl = \Yii::$app->request->hostInfo . '/' . static::getRelativePath(realpath($_SERVER['DOCUMENT_ROOT']), $saveTo);
         return $accessUrl;
     }
 
