@@ -13,9 +13,9 @@ use Hejiang\Storage\Drivers\BaseDriver;
  */
 class StorageComponent extends \yii\base\Component
 {
-    protected $_driver;
+    private $driver;
 
-    public $_basePath;
+    protected $basePath;
 
     public function getDriver()
     {
@@ -38,7 +38,7 @@ class StorageComponent extends \yii\base\Component
 
     protected function getDriverInstance()
     {
-        return $this->_driver;
+        return $this->driver;
     }
 
     protected function setDriverInstance($value)
@@ -46,17 +46,17 @@ class StorageComponent extends \yii\base\Component
         if (!($value instanceof BaseDriver)) {
             throw new \InvalidArgumentException('Driver must be a instance of BaseDriver');
         }
-        $this->_driver = $value;
+        $this->driver = $value;
     }
 
     public function getBasePath()
     {
-        return $this->_basePath;
+        return $this->basePath;
     }
 
     public function setBasePath($value)
     {
-        $this->_basePath = $value;
+        $this->basePath = $value;
     }
 
     /**

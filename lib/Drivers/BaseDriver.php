@@ -38,5 +38,5 @@ abstract class BaseDriver extends \yii\base\Component
         return call_user_func_array($this->urlCallback, [$url, $saveTo, $this]);
     }
 
-    abstract function put($localFile, $saveTo);
+    abstract public function put($localFile, $saveTo);
 }
