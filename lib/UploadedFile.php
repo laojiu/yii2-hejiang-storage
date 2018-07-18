@@ -2,7 +2,6 @@
 
 namespace Hejiang\Storage;
 
-
 class UploadedFile extends \yii\web\UploadedFile
 {
     /**
@@ -58,8 +57,7 @@ class UploadedFile extends \yii\web\UploadedFile
     public function saveAsUniqueHash()
     {
         $uniqueName = sha1_file($this->tempName);
-        if($uniqueName == false)
-        {
+        if ($uniqueName == false) {
             return false;
         }
         return $this->saveWithOriginalExtension($uniqueName);

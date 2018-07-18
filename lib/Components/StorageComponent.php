@@ -7,7 +7,7 @@ use Hejiang\Storage\Drivers\BaseDriver;
 
 /**
  * Storage component
- * 
+ *
  * @property \Hejiang\Drivers\BaseDriver $driver
  * @property string $basePath
  */
@@ -43,7 +43,7 @@ class StorageComponent extends \yii\base\Component
 
     protected function setDriverInstance($value)
     {
-        if(!($value instanceof BaseDriver)){
+        if (!($value instanceof BaseDriver)) {
             throw new \InvalidArgumentException('Driver must be a instance of BaseDriver');
         }
         $this->_driver = $value;
@@ -69,5 +69,4 @@ class StorageComponent extends \yii\base\Component
     {
         return UploadedFile::getInstanceByStorage($name, $this->driver, $this->basePath);
     }
-
 }

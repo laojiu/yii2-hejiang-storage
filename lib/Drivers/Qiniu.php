@@ -33,8 +33,7 @@ class Qiniu extends BaseDriver
     {
         $token = $this->qiniuAuth->uploadToken($this->bucket);
         list($res, $err) = $this->qiniuUploadManager->putFile($token, $saveTo, $localFile);
-        if($err !== null)
-        {
+        if ($err !== null) {
             throw new StorageException($err->message());
         }
         return $res['key'];

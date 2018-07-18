@@ -4,7 +4,6 @@ namespace Hejiang\Storage\Drivers;
 
 use Hejiang\Storage\Helpers\UrlConverter;
 
-
 abstract class BaseDriver extends \yii\base\Component
 {
     public $bucket = '';
@@ -18,8 +17,7 @@ abstract class BaseDriver extends \yii\base\Component
     public function init()
     {
         parent::init();
-        if($this->urlCallback === null)
-        {
+        if ($this->urlCallback === null) {
             $this->urlCallback = new UrlConverter();
         }
     }
@@ -29,7 +27,7 @@ abstract class BaseDriver extends \yii\base\Component
         return $this->urlCallback;
     }
 
-    public function setUrlCallback(Callable $cb)
+    public function setUrlCallback(callable $cb)
     {
         $this->urlCallback = $cb;
     }

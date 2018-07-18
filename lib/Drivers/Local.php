@@ -4,7 +4,6 @@ namespace Hejiang\Storage\Drivers;
 
 use Hejiang\Storage\Exceptions\StorageException;
 
-
 class Local extends BaseDriver
 {
     public function __construct($config = [])

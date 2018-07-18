@@ -23,9 +23,9 @@ class Aliyun extends BaseDriver
     {
         parent::__construct($config);
         $this->ossClient = new OssClient(
-            $this->accessKey, 
-            $this->secretKey, 
-            $this->endPoint, 
+            $this->accessKey,
+            $this->secretKey,
+            $this->endPoint,
             $this->isCName
         );
     }
