@@ -1,5 +1,5 @@
 {
-    "name": "wi1dcard/yii2-hejiang-storage",
+    "name": "LaoJiu/yii2-hejiang-storage",
     "description": "A file uploading extension for Yii2, saving files to object storage service.",
     "type": "library",
     "require": {
